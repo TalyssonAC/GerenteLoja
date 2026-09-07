@@ -18,7 +18,3 @@ class Cliente:
 
     def __str__(self):
         return f"Cliente {self.codigo} - {self.nome}"
-
-
-def cliente_from_csv_row(row):
-    return Cliente(row["codigo"], row["nome"])

@@ -37,11 +37,3 @@ class ItemVenda:
             f"Item da venda {self.codigo_venda} - Produto {self.codigo_produto} - "
             f"Quantidade: {self.quantidade} - Valor unitario: R$ {self.valor_unitario:.2f}"
         )
-
-    def item_venda_fro_csv_row(row):
-        return ItemVenda(
-            row["codigo_venda"],
-            row["codigo_produto"],
-            row["quantidade"],
-            row["valor_unitario"],
-        )

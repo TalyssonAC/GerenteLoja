@@ -42,11 +42,3 @@ class Produto:
             f"Produto {self.codigo} - {self.nome} - Preco: R$ {self.preco:.2f} - "
             f"Estoque: {self.quantidade_estoque} - Estoque minimo: {self.estoque_minimo}"
         )
-def produto_from_csv_row(row):
-    return Produto(
-        row["codigo"],
-        row["nome"],
-        row["preco"],
-        row["quantidade_estoque"],
-        row["estoque_minimo"],
-    )
