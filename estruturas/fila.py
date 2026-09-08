@@ -1,31 +1,29 @@
-
 class Fila:
+    """Fila FIFO usada para armazenar vendas na ordem em que ocorreram."""
+
     def __init__(self):
-        self._lista_de_valores = []
+        self._valores = []
 
     def enqueue(self, item):
-        self._lista_de_valores.append(item)
+        if item is None:
+            raise ValueError("Valores nulos nao podem ser adicionados.")
+        self._valores.append(item)
 
     def dequeue(self):
-        if len(self._lista_de_valores) == 0:
-            raise IndexError("Não há dados para desinfileirar!")
-
-        return self._lista_de_valores.pop(0)
+        if self.is_empty():
+            raise IndexError("Nao ha dados para remover da fila.")
+        return self._valores.pop(0)
 
     def front(self):
-        if len(self._lista_de_valores) == 0:
-            raise IndexError("Não há dados na fila!")
+        if self.is_empty():
+            raise IndexError("Nao ha dados na fila.")
+        return self._valores[0]
 
-        return self._lista_de_valores[0]
+    def is_empty(self):
+        return len(self._valores) == 0
 
-    def is_empty(self): 
-        return len(self._lista_de_valores) == 0
-
-    def size(self):
-        return len(self._lista_de_valores)
+    def listar(self):
+        return list(self._valores)
 
     def __len__(self):
-        return len(self._lista_de_valores)
-
-fila = Fila()
-fila.enqueue(10)
+        return len(self._valores)
