@@ -1,6 +1,4 @@
 class DNodo:
-    """Nodo usado pela lista duplamente encadeada."""
-
     def __init__(self, valor):
         self.valor = valor
         self.anterior = None
@@ -8,3 +6,4 @@ class DNodo:
 
     def __str__(self):
         return str(self.valor)
+
