@@ -13,8 +13,8 @@ class Produto:
         if self.nome == "":
             raise ValueError("O nome do produto não pode ser vazio.")
 
-        if self.preco < 0:
-            raise ValueError("O preco do produto não pode ser negativo.")
+        if self.preco <= 0:
+            raise ValueError("O preco do produto precisa ser maior que zero.")
 
         if self.quantidade_estoque < 0:
             raise ValueError("A quantidade em estoque do produto não pode ser negativa.")

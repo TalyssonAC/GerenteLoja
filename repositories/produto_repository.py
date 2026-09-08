@@ -1,8 +1,9 @@
 from models.produto import Produto
+from estruturas.lde import LDE
 
 class ProdutoRepository:
 	def __init__(self):
-		self._produtos = []
+		self._produtos = LDE()
 
 	def adicionar(self, produto):
 		self._validar_produto(produto)
@@ -10,41 +11,30 @@ class ProdutoRepository:
 		if self.buscar_por_codigo(produto.codigo) is not None:
 			raise ValueError("Ja existe um produto com esse codigo.")
 
-		self._produtos.append(produto)
+		self._produtos.inserir_fim(produto)
 
 	def buscar_por_codigo(self, codigo):
-		codigo = int(codigo)
-
-		for produto in self._produtos:
-			if produto.codigo == codigo:
-				return produto
-
-		return None
+		return self._produtos.buscar(codigo)
 
 	def listar(self):
-		return self._produtos.copy()
+		return self._produtos.listar()
+
+	def listar_inverso(self):
+		return self._produtos.listar_inverso()
 
 	def listar_abaixo_estoque_minimo(self):
-		return [produto for produto in self._produtos if produto.esta_abaixo_estoque_minimo()]
+		return [produto for produto in self._produtos.listar() if produto.esta_abaixo_estoque_minimo()]
 
 	def atualizar(self, produto):
 		self._validar_produto(produto)
 
-		for indice, produto_atual in enumerate(self._produtos):
-			if produto_atual.codigo == produto.codigo:
-				self._produtos[indice] = produto
-				return produto
-
-		raise ValueError("Produto nao encontrado.")
+		if self._produtos.remover(produto.codigo) is None:
+			raise ValueError("Produto nao encontrado.")
+		self._produtos.inserir_fim(produto)
+		return produto
 
 	def remover(self, codigo):
-		produto = self.buscar_por_codigo(codigo)
-
-		if produto is None:
-			return False
-
-		self._produtos.remove(produto)
-		return True
+		return self._produtos.remover(codigo) is not None
 
 	def para_linha_csv(self, produto):
 		self._validar_produto(produto)
