@@ -345,6 +345,7 @@ def executar_opcao(opcao, service):
 		menu_estoque(service)
 	else:
 		print("Opcao invalida. Tente novamente.")
+		pausar()
 
 
 def main():
